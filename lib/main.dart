@@ -16,15 +16,29 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery',
       initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => const LoginPage())
-      ],
+      getPages: [GetPage(name: '/', page: () => const LoginPage())],
+      theme: ThemeData(
+          primaryColor: Colors.amber,
+          colorScheme: const ColorScheme(
+            primary: Colors.amber,
+            secondary: Colors.amber,
+            brightness: Brightness.light,
+            onBackground: Colors.grey,
+            background: Colors.grey,
+            error: Colors.grey,
+            onPrimary: Colors.grey,
+            onSecondary: Colors.grey,
+            onError: Colors.grey,
+            onSurface: Colors.grey,
+            surface: Colors.grey,
+          )),
       navigatorKey: Get.key,
     );
   }
