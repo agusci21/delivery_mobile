@@ -1,4 +1,6 @@
+import 'package:delivery_app/src/pages/login/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,7 +11,7 @@ class LoginPage extends StatelessWidget {
       body: Stack(
         children: const [_BackgroundCover(), _BoxForm(), _ImageCover()],
       ),
-      bottomNavigationBar: const _NewAcountText(),
+      bottomNavigationBar: _NewAcountText(),
     );
   }
 }
@@ -57,25 +59,28 @@ class _BackgroundCover extends StatelessWidget {
 }
 
 class _NewAcountText extends StatelessWidget {
-  const _NewAcountText({Key? key}) : super(key: key);
-
+  _NewAcountText({Key? key}) : super(key: key);
+  final LoginController _loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
+      children: [
+        const Text(
           '¿No tienes una cuenta?',
           style: TextStyle(color: Colors.black, fontSize: 17),
         ),
-        SizedBox(
+        const SizedBox(
           width: 7,
         ),
-        Text('Registrate aquí',
-            style: TextStyle(
-                color: Colors.amber,
-                fontWeight: FontWeight.bold,
-                fontSize: 17)),
+        GestureDetector(
+          onTap: () => _loginController.goToRegisterPage(),
+          child: const Text('Registrate aquí',
+              style: TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17)),
+        ),
       ],
     );
   }
