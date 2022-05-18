@@ -1,7 +1,8 @@
-import 'package:delivery_app/src/pages/login/login_page.dart';
-import 'package:delivery_app/src/pages/register/register_page.dart';
+import 'package:delivery_app/src/features/login-register/pages/login-register/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'src/pages/features/login-register/register/register_page.dart';
 
 void main() => runApp(const MyApp());
 
