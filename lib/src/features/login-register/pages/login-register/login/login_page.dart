@@ -13,6 +13,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final LoginController loginController = Get.put(LoginController());
+
     return Scaffold(
       body: Stack(
         children: [
@@ -34,19 +36,22 @@ class LoginPage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
+                controller: loginController.emailController,
                 hintText: 'Correo electronico',
                 icon: Icons.email_sharp,
                 keyboardType: TextInputType.emailAddress,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
+                controller: loginController.passwordController,
                 hintText: 'Contraseña',
                 icon: Icons.lock_outline_rounded,
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
-              const LoginRegisterButton(
+              LoginRegisterButton(
                 hintText: 'Login',
+                onPressed: () => loginController.login(),
               )
             ],
           ),

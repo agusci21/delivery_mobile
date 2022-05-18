@@ -1,3 +1,4 @@
+import 'package:delivery_app/src/features/login-register/pages/login-register/register/register_controller.dart';
 import 'package:delivery_app/src/features/login-register/pages/login-register/widgets/backgound.dart';
 import 'package:delivery_app/src/features/login-register/pages/login-register/widgets/box_form.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Get.put(RegisterController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -33,40 +35,47 @@ class RegisterPage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Correo electronico',
+                controller: registerController.emailController,
                 icon: Icons.email_sharp,
                 keyboardType: TextInputType.emailAddress,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Nombre',
+                controller: registerController.firstNameController,
                 icon: Icons.person,
                 keyboardType: TextInputType.text,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Apellido',
+                controller: registerController.lastNameController,
                 icon: Icons.person_outline,
                 keyboardType: TextInputType.text,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Teléfono',
+                controller: registerController.phoneNumberController,
                 icon: Icons.phone,
                 keyboardType: TextInputType.phone,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Contraseña',
+                controller: registerController.passwordController,
                 icon: Icons.lock_outline_rounded,
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
-              const LoginRegisterInputs(
+              LoginRegisterInputs(
                 hintText: 'Repetir contraseña',
+                controller: registerController.repeatPasswordController,
                 icon: Icons.lock_outline_rounded,
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
-              const LoginRegisterButton(
+              LoginRegisterButton(
                 hintText: 'Registrarse',
+                onPressed: () => registerController.register(),
               )
             ],
           ),
