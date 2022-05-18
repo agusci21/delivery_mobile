@@ -1,8 +1,8 @@
-import 'package:delivery_app/src/features/login-register/pages/login-register/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'src/pages/features/login-register/register/register_page.dart';
+import 'package:delivery_app/src/features/login-register/pages/login-register/login/login_page.dart';
+import 'package:delivery_app/src/features/login-register/pages/login-register/register/register_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       getPages: [
         GetPage(name: '/', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegisterPage()),
-        ],
+      ],
       theme: ThemeData(
           primaryColor: Colors.amber,
           colorScheme: const ColorScheme(

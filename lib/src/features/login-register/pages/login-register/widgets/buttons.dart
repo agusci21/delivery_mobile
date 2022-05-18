@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
 class LoginRegisterButton extends StatelessWidget {
-  const LoginRegisterButton({Key? key}) : super(key: key);
+  const LoginRegisterButton({Key? key, required this.hintText}) : super(key: key);
+
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.height * .03, bottom: size.height * .1),
+      margin: EdgeInsets.only(top: size.height * .03, bottom: 20),
       width: double.infinity,
       child: ElevatedButton(
           onPressed: () {},
-          child: const Text(
-            'Login',
-            style: TextStyle(color: Colors.black),
+          child: Text(
+            hintText,
+            style: const TextStyle(color: Colors.black),
           )),
     );
   }

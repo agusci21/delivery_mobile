@@ -12,11 +12,16 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
           const BackgroundCover(),
           BoxForm(
+            margin: EdgeInsets.only(
+                top: size.height * .32,
+                left: size.width * .1,
+                right: size.width * .1),
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 30, bottom: 40),
@@ -40,7 +45,9 @@ class LoginPage extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
-              const LoginRegisterButton()
+              const LoginRegisterButton(
+                hintText: 'Login',
+              )
             ],
           ),
           const _ImageCover()
