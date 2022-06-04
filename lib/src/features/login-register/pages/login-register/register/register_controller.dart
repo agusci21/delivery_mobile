@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:delivery_app/src/models/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:delivery_app/src/controllers/state_management/providers/users_providers.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -9,7 +11,9 @@ class RegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController repeatPasswordController = TextEditingController();
 
-  void register() {
+  final userProvider = UserProvider();
+
+  void register() async {
     String email = emailController.text.trim();
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
@@ -19,6 +23,14 @@ class RegisterController extends GetxController {
 
     if (isValidForm(
         email, firstName, lastName, phoneNumber, password, repeatPassword)) {
+      final user = User(
+          email: email,
+          name: firstName,
+          lastname: lastName,
+          phone: phoneNumber,
+          password: password);
+      Response response = await userProvider.create(user);
+        print(response.body);
       Get.snackbar('Formulario valido', 'Listo para la peticion http');
     }
   }
