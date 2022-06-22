@@ -29,8 +29,7 @@ class RegisterController extends GetxController {
           lastname: lastName,
           phone: phoneNumber,
           password: password);
-      Response response = await userProvider.create(user);
-        print(response.body);
+      /*Response response = */await userProvider.create(user);
       Get.snackbar('Formulario valido', 'Listo para la peticion http');
     }
   }
