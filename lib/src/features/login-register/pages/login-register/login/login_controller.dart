@@ -2,6 +2,7 @@ import 'package:delivery_app/src/controllers/state_management/providers/users_pr
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -12,6 +13,10 @@ class LoginController extends GetxController {
     Get.toNamed('/register');
   }
 
+  void goToHomePage() {
+    Get.toNamed('/home');
+  }
+
   void login() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
@@ -19,7 +24,9 @@ class LoginController extends GetxController {
     if (!isValidForm(email, password)) return;
     final response = await userProvider.login(email, password);
     if (response.success) {
-      Get.snackbar('Login exitoso', 'Bienvenido ${response.user!.name}');
+      response.user!.token = response.token!;
+      GetStorage().write('user', response.user!.toJson());
+      goToHomePage();
     } else {
       Get.snackbar('Login fallido', 'Credenciales invalidas');
     }

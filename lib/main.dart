@@ -1,10 +1,19 @@
+import 'package:delivery_app/src/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import 'package:delivery_app/src/features/home/pages/home-page/home_page.dart';
 import 'package:delivery_app/src/features/login-register/pages/login-register/login/login_page.dart';
 import 'package:delivery_app/src/features/login-register/pages/login-register/register/register_page.dart';
 
-void main() => runApp(const MyApp());
+User userSession =
+    User.fromJson(GetStorage().read('user') ?? <String, dynamic>{});
+
+void main() async {
+  await GetStorage.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,10 +33,11 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery',
-      initialRoute: '/',
+      initialRoute: userSession.id != null ? 'home' : '/',
       getPages: [
         GetPage(name: '/', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegisterPage()),
+        GetPage(name: '/home', page: () => HomePage()),
       ],
       theme: ThemeData(
           primaryColor: Colors.amber,

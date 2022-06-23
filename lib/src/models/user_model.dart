@@ -10,21 +10,23 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   User({
-    required this.email,
-    required this.password,
-    required this.name,
-    required this.phone,
+    this.email,
+    this.password,
+    this.name,
+    this.phone,
     this.id,
     this.lastname,
+    this.token,
     this.image,
   });
 
   int? id;
-  String email;
-  String password;
-  String name;
+  String? email;
+  String? password;
+  String? name;
   String? lastname;
-  String phone;
+  String? token;
+  String? phone;
   String? image;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -33,6 +35,7 @@ class User {
         password: json["password"],
         name: json["name"],
         lastname: json["lastname"],
+        token: json["token"],
         phone: json["phone"],
         image: json["image"],
       );
@@ -43,6 +46,7 @@ class User {
         "password": password,
         "name": name,
         "lastname": lastname,
+        "token" : token,
         "phone": phone,
         "image": image,
       };
