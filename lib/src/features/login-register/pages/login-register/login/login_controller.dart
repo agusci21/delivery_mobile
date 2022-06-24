@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   }
 
   void goToHomePage() {
-    Get.toNamed('/home');
+    Get.offNamedUntil('/home', (_) => false);
   }
 
   void login() async {

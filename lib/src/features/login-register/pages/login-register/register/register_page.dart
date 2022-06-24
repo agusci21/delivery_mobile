@@ -79,7 +79,7 @@ class RegisterPage extends StatelessWidget {
               )
             ],
           ),
-          const CircularNoImageLogo(),
+          CircularNoImageLogo(registerController),
           const _BackButton(),
         ],
       ),
@@ -88,8 +88,11 @@ class RegisterPage extends StatelessWidget {
 }
 
 class CircularNoImageLogo extends StatelessWidget {
-  const CircularNoImageLogo({Key? key}) : super(key: key);
-
+  const CircularNoImageLogo(
+    this.controller, {
+    Key? key,
+  }) : super(key: key);
+  final RegisterController controller;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,11 +100,18 @@ class CircularNoImageLogo extends StatelessWidget {
         margin: const EdgeInsets.only(top: 10),
         alignment: Alignment.topCenter,
         child: GestureDetector(
-          onTap: () {},
-          child: const CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.white,
-            backgroundImage: AssetImage('assets/img/user_profile.png'),
+          onTap: () {
+            controller.showAlertDialog(context);
+          },
+          child: GetBuilder<RegisterController>(
+            builder: ((controller) => CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.white,
+                  backgroundImage: controller.imageFile != null
+                      ? FileImage(controller.imageFile!)
+                      : const AssetImage('assets/img/user_profile.png')
+                          as ImageProvider,
+                )),
           ),
         ),
       ),

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:delivery_app/src/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:delivery_app/src/controllers/state_management/providers/users_providers.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -12,6 +15,9 @@ class RegisterController extends GetxController {
   TextEditingController repeatPasswordController = TextEditingController();
 
   final userProvider = UserProvider();
+
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
 
   void register() async {
     String email = emailController.text.trim();
@@ -29,7 +35,7 @@ class RegisterController extends GetxController {
           lastname: lastName,
           phone: phoneNumber,
           password: password);
-      /*Response response = */await userProvider.create(user);
+      /*Response response = */ await userProvider.create(user);
       Get.snackbar('Formulario valido', 'Listo para la peticion http');
     }
   }
@@ -77,5 +83,41 @@ class RegisterController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  Future selectImage(ImageSource source) async {
+    XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+      imageFile = File(image.path);
+      update();
+    }
+  }
+
+  void showAlertDialog(BuildContext context) {
+    TextStyle style = const TextStyle(color: Colors.black);
+    Widget galleryButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.gallery);
+        },
+        child: Text(
+          'Galeria',
+          style: style,
+        ));
+
+    Widget cameraButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.camera);
+        },
+        child: Text('Camara', style: style));
+
+    AlertDialog alertDialog = AlertDialog(
+      title: const Text('Seleccione la fuente de la foto'),
+      actions: [galleryButton, cameraButton],
+      actionsAlignment: MainAxisAlignment.spaceEvenly,
+    );
+
+    showDialog(context: context, builder: (_) => alertDialog);
   }
 }
